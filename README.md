@@ -7,6 +7,11 @@ sudo mkdir -p ./database/sonardb
 sudo chown -R 1001:1001 ./database/sonardb
 ```
 
+Install Java jdk 11
+```
+sudo apt-get install openjdk-11-jdk -y
+```
+
 Increase Linux setting https://docs.sonarqube.org/latest/requirements/requirements/#header-5
 ```
 sudo sysctl -w vm.max_map_count=524288
