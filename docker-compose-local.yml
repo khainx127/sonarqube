@@ -1,0 +1,39 @@
+version: '3.5'
+
+networks:
+  sonar-network:
+    name: sonar-network
+    driver: bridge
+
+services:
+  sonardb:
+    image: docker.io/bitnami/postgresql:11.7.0-debian-10-r26
+    container_name: sonardb
+    volumes:
+      - ./database/sonardb:/bitnami/postgresql
+    restart: always
+    environment:
+      POSTGRESQL_PORT_NUMBER: 5432
+      POSTGRESQL_VOLUME_DIR: /bitnami/postgresql
+      PGDATA: /bitnami/postgresql/data
+      POSTGRES_USER: sonarqube
+      POSTGRES_PASSWORD: 12345678@abc
+      POSTGRES_DB: sonarDB
+    networks:
+      - sonar-network
+
+  sonarqube:
+    depends_on:
+      - sonardb
+    image: sonarqube:8.6.0-community
+    container_name: sonarqube
+    restart: always
+    ports:
+      - "9000:9000"
+      - "9092:9092"
+    environment:
+      SONARQUBE_JDBC_USERNAME: sonarqube
+      SONARQUBE_JDBC_PASSWORD: 12345678@abc
+      SONAR_JDBC_URL: jdbc:postgresql://sonardb:5432/sonarDB
+    networks:
+      - sonar-network
