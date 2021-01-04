@@ -30,6 +30,12 @@ sysctl -w vm.max_map_count=524288
 sysctl -w fs.file-max=131072
 ```
 
+Increase setting permanently, add `/etc/sysctl.conf` 
+```
+vm.max_map_count=524288
+fs.file-max=131072
+```
+
 Run command
 ```
 docker-compose -f docker-compose-local.yml up -d
