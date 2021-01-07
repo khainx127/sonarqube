@@ -17,26 +17,20 @@ Install Java jdk 11 on windows
 choco install openjdk11
 ```
 
-Increase Linux setting https://docs.sonarqube.org/latest/requirements/requirements/#header-5
+## Increase Linux setting https://docs.sonarqube.org/latest/requirements/requirements/#header-5
 ```
 sudo sysctl -w vm.max_map_count=524288
 sudo sysctl -w fs.file-max=131072
 ```
 
-Increase Windows WSL setting
+## Increase Windows WSL setting
 ```
 wsl -d docker-desktop
 sysctl -w vm.max_map_count=524288
 sysctl -w fs.file-max=131072
 ```
 
-Increase setting permanently, add `/etc/sysctl.conf` 
-```
-vm.max_map_count=524288
-fs.file-max=131072
-```
-
-Run command
+## Run command to start service
 ```
 docker-compose -f docker-compose-local.yml up -d
 ```
